@@ -3,3 +3,7 @@
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
+
+.App {
+  padding-bottom: 100px;
+}
