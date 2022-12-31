@@ -10,18 +10,18 @@ import {
 } from "@mui/icons-material";
 
 export const section1 = [
-  { icon: <Feed />, text: "Information générales", id: 1 },
-  { icon: <LocalPhone />, text: "Me contacter / Coordonnées", id: 2 },
-  { icon: <LocationOn />, text: "Adresse", id: 3 },
+  { icon: <Feed />, text: "Information générales", id: 0 },
+  { icon: <LocalPhone />, text: "Me contacter / Coordonnées", id: 1 },
+  { icon: <LocationOn />, text: "Adresse", id: 2 },
 ];
 
 export const section2 = [
-  { icon: <Lock />, text: "Securité", id: 4 },
-  { icon: <Folder />, text: "Documents", id: 5 },
+  { icon: <Lock />, text: "Securité", id: 3 },
+  { icon: <Folder />, text: "Documents", id: 4 },
 ];
 
 export const section3 = [
-  { icon: <SupportAgent />, text: "Aide & Support", id: 6 },
-  { icon: <ChatBubble />, text: "Contactez-nous", id: 7 },
-  { icon: <Security />, text: "Politique de confidentialité", id: 8 },
+  { icon: <SupportAgent />, text: "Aide & Support", id: 5 },
+  { icon: <ChatBubble />, text: "Contactez-nous", id: 6 },
+  { icon: <Security />, text: "Politique de confidentialité", id: 7 },
 ];

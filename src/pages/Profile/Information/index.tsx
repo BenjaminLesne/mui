@@ -2,12 +2,17 @@ import { Box, Button, Typography } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { Form } from "../Form";
 import { goBack, page } from "./styles";
+import { InputData } from "../utils/Types";
 
 interface Props {
   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
+  data: {
+    title: string;
+    inputs: InputData[];
+  };
 }
 
-export const Information = ({ setSelectedId }: Props) => {
+export const Information = ({ setSelectedId, data }: Props) => {
   return (
     <Box sx={page}>
       <Button
@@ -25,9 +30,9 @@ export const Information = ({ setSelectedId }: Props) => {
         margin="25px 0 45px 0"
         fontWeight="bold"
       >
-        Information Générales
+        {data.title}
       </Typography>
-      <Form />
+      <Form inputs={data.inputs} />
     </Box>
   );
 };
