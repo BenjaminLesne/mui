@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { Form } from "../Form";
 import { goBack, page } from "./styles";
-import { InputData } from "../utils/Types";
+import { InputData } from "../../../utils/Types";
 
 interface Props {
   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;

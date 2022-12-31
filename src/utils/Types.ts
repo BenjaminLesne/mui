@@ -1,7 +1,8 @@
 export interface InputData {
-  type: string;
+  id: string;
+  type?: string;
   label: string;
   helperText?: string;
   defaultValue?: string;
-  options?: string[];
+  options?: { value: string; label: string }[];
 }

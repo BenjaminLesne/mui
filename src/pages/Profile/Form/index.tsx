@@ -1,6 +1,6 @@
 import { Box, Button, Container, MenuItem, TextField } from "@mui/material";
 import { form, buttons, cancel } from "./styles";
-import type { InputData } from "../utils/Types";
+import type { InputData } from "../../../utils/Types";
 
 import dayjs, { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -13,34 +13,12 @@ interface Props {
 }
 
 export const Form = ({ inputs }: Props) => {
-  /*
-{
-   "email":"cyrano@gmail.com",
-   "firstName":"Cyrano",
-   "lastName":"De Bergerac",
-   "identifier":"Cyrano",
-   "phoneNumber":"0606060606",
-   "mobilePhoneNumber":"0606060606",
-   "birthday":630892800,
-   "gender":"Male",
-   "address":"8 impasse des ecrivains",
-   "zipCode":"13004",
-   "city":"Marseille",
-   "documents":[
-      {
-         "name":"Test",
-         "date":1666292118,
-         "visibility":"Public"
-      }
-   ]
-}
-  */
-  //dayjs(630892800)
-  const [value, setValue] = useState<Dayjs | null>(dayjs.unix(630892800));
+  // dayjs.unix(630892800)
+  const [value, setValue] = useState<Dayjs | null>(null);
 
   function generateInputsComponents(inputsData: InputData[]) {
     return inputsData.map((input) => {
-      if (input.type === "date") {
+      if (input.id === "birthday") {
         return (
           <LocalizationProvider
             dateAdapter={AdapterDayjs}
@@ -61,14 +39,15 @@ export const Form = ({ inputs }: Props) => {
           <TextField
             key={crypto.randomUUID()}
             select={input.type === "select" ? true : false}
+            type={input.type ?? ""}
             label={input.label}
             helperText={input.helperText ?? ""}
             defaultValue={input.defaultValue ?? ""}
             variant="outlined"
           >
             {input.options?.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
+              <MenuItem key={crypto.randomUUID()} value={option.value}>
+                {option.label}
               </MenuItem>
             ))}
           </TextField>

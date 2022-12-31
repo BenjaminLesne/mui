@@ -1,0 +1,20 @@
+{
+   "email":"cyrano@gmail.com",
+   "firstName":"Cyrano",
+   "lastName":"De Bergerac",
+   "identifier":"Cyrano",
+   "phoneNumber":"0606060606",
+   "mobilePhoneNumber":"0606060606",
+   "birthday":630892800,
+   "gender":"Male",
+   "address":"8 impasse des ecrivains",
+   "zipCode":"13004",
+   "city":"Marseille",
+   "documents":[
+      {
+         "name":"Test",
+         "date":1666292118,
+         "visibility":"Public"
+      }
+   ]
+}
