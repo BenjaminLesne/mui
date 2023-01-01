@@ -41,7 +41,7 @@ export const Form = ({ inputs }: Props) => {
   const [isDocuments, setIsDocuments] = useState<boolean>(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  const mobileMenu = [
+  const documentMenu = [
     { icon: <Visibility />, text: "Afficher" },
     { icon: <FileDownload />, text: "Télécharger" },
     { icon: <Create />, text: "Renommer" },
@@ -110,6 +110,7 @@ export const Form = ({ inputs }: Props) => {
                         sx={{
                           justifyContent: "flex-end",
                           paddingRight: "unset",
+                          display: { md: "none" },
                         }}
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
                       >
@@ -117,6 +118,27 @@ export const Form = ({ inputs }: Props) => {
                           <MoreVert />
                         </ListItemIcon>
                       </ListItemButton>
+                      {documentMenu.map((item) => (
+                        <ListItemButton
+                          key={crypto.randomUUID()}
+                          sx={{
+                            display: { xs: "none", md: "flex" },
+                            maxWidth: "48px",
+                            maxHeight: "48px",
+                            minWidth: "unset",
+                            aspectRatio: "1",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            padding: "0px",
+                          }}
+                        >
+                          <ListItemIcon
+                            sx={{ display: "grid", placeItems: "center" }}
+                          >
+                            {item.icon}
+                          </ListItemIcon>
+                        </ListItemButton>
+                      ))}
                     </ListItem>
                   );
                 });
@@ -149,7 +171,10 @@ export const Form = ({ inputs }: Props) => {
   }
 
   return (
-    <Box component={isDocuments ? "div" : "form"} sx={form}>
+    <Box
+      component={isDocuments ? "div" : "form"}
+      sx={isDocuments ? { ...form, maxWidth: "650px" } : form}
+    >
       {isDocuments && (
         <>
           <Box sx={{ ...buttons, textAlign: "right", marginTop: "0" }}>
@@ -163,7 +188,7 @@ export const Form = ({ inputs }: Props) => {
           </Box>
           <Slide direction="up" in={showMobileMenu} mountOnEnter unmountOnExit>
             <List sx={mobileMenuStyle}>
-              {mobileMenu.map((item) => (
+              {documentMenu.map((item) => (
                 <ListItem key={crypto.randomUUID()}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText>{item.text}</ListItemText>

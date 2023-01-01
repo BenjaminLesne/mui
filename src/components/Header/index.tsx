@@ -2,7 +2,6 @@ import {
   Box,
   IconButton,
   Toolbar,
-  useMediaQuery,
   AppBar,
   List,
   ListItem,
@@ -10,7 +9,6 @@ import {
   ListItemText,
   Container,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import { Logo } from "../../assets/Logo";
@@ -23,8 +21,6 @@ import {
 } from "./styles";
 
 export const Header = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navLabelLinks = [
     "Accueil",
     "Profile",

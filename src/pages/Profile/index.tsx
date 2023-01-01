@@ -3,7 +3,8 @@ import { Hero } from "./Hero";
 import { Menu } from "./Menu";
 import { Information } from "./Information";
 import { profileStyle } from "./styles";
-import { Box, Container, Typography } from "@mui/material";
+import { Container, Typography, useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { data } from "./utils/data";
 import type { InputData } from "../../utils/Types";
 
@@ -29,6 +30,10 @@ export const Profile = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState<Data[] | []>([]);
   const [selectedId, setSelectedId] = useState<null | number>(null);
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
+
+  if (selectedId === null && isDesktop) setSelectedId(0);
 
   function updateInputsDefaultValue(
     defaultValues: DefaultValues,

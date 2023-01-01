@@ -4,6 +4,7 @@ export const form = {
   display: "flex",
   flexDirection: "column",
   gap: "25px",
+  paddingInline: "10px",
 };
 
 export const buttons = { textAlign: "center", marginTop: "45px" };
