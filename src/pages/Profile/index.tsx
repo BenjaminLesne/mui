@@ -3,7 +3,7 @@ import { Hero } from "./Hero";
 import { Menu } from "./Menu";
 import { Information } from "./Information";
 import { profileStyle } from "./styles";
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { data } from "./utils/data";
 import type { InputData } from "../../utils/Types";
 
@@ -67,12 +67,12 @@ export const Profile = () => {
   if (isLoaded === false) return <Typography>Chargement...</Typography>;
 
   return (
-    <Box sx={profileStyle}>
+    <Container maxWidth="lg" disableGutters sx={profileStyle}>
       <Hero />
-      <Menu selectedId={selectedId} setSelectedId={setSelectedId} />
       {selectedId !== null && items[selectedId] != null && (
         <Information data={items[selectedId]} setSelectedId={setSelectedId} />
       )}
-    </Box>
+      <Menu selectedId={selectedId} setSelectedId={setSelectedId} />
+    </Container>
   );
 };

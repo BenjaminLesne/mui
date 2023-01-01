@@ -13,4 +13,13 @@ export const theme = createTheme({
     },
     contrastThreshold: 4.5,
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 750,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
 });

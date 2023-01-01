@@ -93,6 +93,8 @@ export const data: { title: string; inputs: InputData[] }[] = [
       {
         label: "Mot de passe",
         type: "password",
+        helperText: "doit contenir 8 caractères minimum",
+
         defaultValue: "",
       },
       {

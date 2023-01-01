@@ -13,16 +13,25 @@ export const hero = {
   paddingTop: "30px",
   backgroundColor: "primary.main",
   display: "flex",
-  flexDirection: "column",
+  flexDirection: { xs: "column", sm: "row-reverse" },
   justifyContent: "center",
   alignItems: "center",
-  position: "relative",
+  position: { xs: "relative", sm: "absolute" },
+  top: { sm: 0 },
+  right: { sm: 0 },
+  zIndex: { sm: 3 },
+  gap: { sm: "10px" },
+  paddingRight: { sm: "24px" },
+
   "&:before": {
     content: '""',
     position: "absolute",
     inset: 0,
     backgroundColor: "white",
-    clipPath: "polygon(100% 10%, 100% 100%, 0 100%, 0 70%)",
+    clipPath: {
+      xs: "polygon(100% 10%, 100% 100%, 0 100%, 0 70%)",
+      sm: "unset",
+    },
   },
 };
 
@@ -32,7 +41,7 @@ export const avatar = {
   height: 130,
 };
 
-export const listItem = { textAlign: "center", margin: 0 };
+export const listItem = { textAlign: { xs: "center", sm: "right" }, margin: 0 };
 
 export const username = {
   fontWeight: "bold",
@@ -40,4 +49,5 @@ export const username = {
   color: "black",
   lineHeight: "100%",
   marginBlock: "10px",
+  paddingRight: { sm: "unset" },
 };

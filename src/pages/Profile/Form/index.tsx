@@ -49,11 +49,10 @@ export const Form = ({ inputs }: Props) => {
   ];
 
   function generateInputsComponents(inputsData: InputData[]) {
-    console.log(inputsData);
-
     return inputsData.map((input) => {
       switch (input.id) {
         case "birthday":
+          if (isDocuments) setIsDocuments(false);
           if (typeof input.defaultValue === "number" && birthday === null) {
             const newBirthday = dayjs.unix(input.defaultValue);
             setBirthday(newBirthday);
@@ -126,6 +125,8 @@ export const Form = ({ inputs }: Props) => {
             </List>
           );
         default:
+          if (isDocuments) setIsDocuments(false);
+
           return (
             <TextField
               key={crypto.randomUUID()}
@@ -148,7 +149,7 @@ export const Form = ({ inputs }: Props) => {
   }
 
   return (
-    <Container component={isDocuments ? "div" : "form"} sx={form}>
+    <Box component={isDocuments ? "div" : "form"} sx={form}>
       {isDocuments && (
         <>
           <Box sx={{ ...buttons, textAlign: "right", marginTop: "0" }}>
@@ -183,6 +184,6 @@ export const Form = ({ inputs }: Props) => {
           </Button>
         </Box>
       )}
-    </Container>
+    </Box>
   );
 };
