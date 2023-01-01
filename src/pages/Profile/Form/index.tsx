@@ -1,4 +1,18 @@
-import { Box, Button, Container, MenuItem, TextField } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { form, buttons, cancel } from "./styles";
 import type { InputData } from "../../../utils/Types";
 
@@ -7,66 +21,122 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useState } from "react";
+import { Article, AddCircleOutline, MoreVert } from "@mui/icons-material";
 
 interface Props {
   inputs: InputData[];
 }
 
 export const Form = ({ inputs }: Props) => {
-  // dayjs.unix(630892800)
-  const [value, setValue] = useState<Dayjs | null>(null);
+  const [birthday, setBirthday] = useState<Dayjs | null>(null);
+  const [isDocuments, setIsDocuments] = useState<boolean>(false);
 
   function generateInputsComponents(inputsData: InputData[]) {
+    console.log(inputsData);
+
     return inputsData.map((input) => {
-      if (input.id === "birthday") {
-        return (
-          <LocalizationProvider
-            dateAdapter={AdapterDayjs}
-            key={crypto.randomUUID()}
-          >
-            <DatePicker
-              label="Date de naissance"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        );
-      } else {
-        return (
-          <TextField
-            key={crypto.randomUUID()}
-            select={input.type === "select" ? true : false}
-            type={input.type ?? ""}
-            label={input.label}
-            helperText={input.helperText ?? ""}
-            defaultValue={input.defaultValue ?? ""}
-            variant="outlined"
-          >
-            {input.options?.map((option) => (
-              <MenuItem key={crypto.randomUUID()} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-        );
+      switch (input.id) {
+        case "birthday":
+          if (typeof input.defaultValue === "number" && birthday === null) {
+            const newBirthday = dayjs.unix(input.defaultValue);
+            setBirthday(newBirthday);
+          }
+          return (
+            <LocalizationProvider
+              dateAdapter={AdapterDayjs}
+              key={crypto.randomUUID()}
+            >
+              <DatePicker
+                label="Date de naissance"
+                value={birthday}
+                onChange={(newValue) => {
+                  setBirthday(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          );
+        case "documents":
+          if (isDocuments === false) setIsDocuments(true);
+          return (
+            <List key={crypto.randomUUID()}>
+              <ListItem sx={{ padding: "0px" }}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <Article />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary="CV.pdf"
+                  secondary="Ajouté le 28/12/2022"
+                />
+                <Typography
+                  component="span"
+                  sx={{
+                    padding: "5px 10px",
+                    backgroundColor: "green",
+                    color: "white",
+                    borderRadius: "4px",
+                  }}
+                >
+                  Public
+                </Typography>
+                <ListItemButton
+                  sx={{ justifyContent: "flex-end", paddingRight: "unset" }}
+                >
+                  <ListItemIcon sx={{ minWidth: "unset" }}>
+                    <MoreVert />
+                  </ListItemIcon>
+                </ListItemButton>
+              </ListItem>
+            </List>
+          );
+        default:
+          return (
+            <TextField
+              key={crypto.randomUUID()}
+              select={input.type === "select" ? true : false}
+              type={input.type ?? ""}
+              label={input.label}
+              helperText={input.helperText ?? ""}
+              defaultValue={input.defaultValue ?? ""}
+              variant="outlined"
+            >
+              {input.options?.map((option) => (
+                <MenuItem key={crypto.randomUUID()} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          );
       }
     });
   }
 
   return (
-    <Container component="form" sx={form}>
+    <Container component={isDocuments ? "div" : "form"} sx={form}>
+      {isDocuments && (
+        <Box sx={{ ...buttons, textAlign: "right", marginTop: "0" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddCircleOutline />}
+          >
+            Nouveau
+          </Button>
+        </Box>
+      )}
       {generateInputsComponents(inputs)}
-      <Box sx={buttons}>
-        <Button variant="text" color="warning" sx={cancel}>
-          Annuler
-        </Button>
-        <Button variant="contained" color="primary">
-          Enregistrer
-        </Button>
-      </Box>
+      {isDocuments === false && (
+        <Box sx={buttons}>
+          <Button variant="text" color="warning" sx={cancel}>
+            Annuler
+          </Button>
+          <Button variant="contained" color="primary">
+            Enregistrer
+          </Button>
+        </Box>
+      )}
     </Container>
   );
 };
