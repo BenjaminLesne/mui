@@ -29,6 +29,9 @@ export const Profile = () => {
   const [error, setError] = useState<{ message: string } | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState<Data[] | []>([]);
+  const [heroData, setHeroData] = useState<{
+    [key: string]: string | number | [];
+  }>({});
   const [selectedId, setSelectedId] = useState<null | number>(null);
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
@@ -59,6 +62,7 @@ export const Profile = () => {
 
           setIsLoaded(true);
           setItems(newData);
+          setHeroData(result);
         },
         (error: any) => {
           setIsLoaded(true);
@@ -73,11 +77,15 @@ export const Profile = () => {
 
   return (
     <Container maxWidth="lg" disableGutters sx={profileStyle}>
-      <Hero />
+      <Hero data={heroData} />
       {selectedId !== null && items[selectedId] != null && (
         <Information data={items[selectedId]} setSelectedId={setSelectedId} />
       )}
-      <Menu selectedId={selectedId} setSelectedId={setSelectedId} />
+      <Menu
+        selectedId={selectedId}
+        setSelectedId={setSelectedId}
+        isDesktop={isDesktop}
+      />
     </Container>
   );
 };

@@ -8,9 +8,10 @@ import { Container } from "@mui/system";
 interface Props {
   selectedId: null | number;
   setSelectedId: Dispatch<React.SetStateAction<number | null>>;
+  isDesktop: boolean;
 }
 
-export const Menu = ({ selectedId, setSelectedId }: Props) => {
+export const Menu = ({ selectedId, setSelectedId, isDesktop }: Props) => {
   return (
     <Container sx={containerStyle}>
       <Typography variant="h5" component="h2" sx={titleStyle}>
@@ -21,16 +22,19 @@ export const Menu = ({ selectedId, setSelectedId }: Props) => {
           data={section1}
           selectedId={selectedId}
           setSelectedId={setSelectedId}
+          isDesktop={isDesktop}
         />
         <Section
           data={section2}
           selectedId={selectedId}
           setSelectedId={setSelectedId}
+          isDesktop={isDesktop}
         />
         <Section
           data={section3}
           selectedId={selectedId}
           setSelectedId={setSelectedId}
+          isDesktop={isDesktop}
         />
       </List>
       <Divider orientation="vertical" sx={dividerStyle} />

@@ -12,7 +12,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import { badge, hero, avatar, listItem, username } from "./styles";
 import Benjamin from "../../../assets/benjamin.jpg";
 
-export const Hero = () => {
+interface Props {
+  data: {
+    [key: string]: string | number | [];
+  };
+}
+
+export const Hero = ({ data }: Props) => {
   return (
     <Box sx={hero}>
       <Badge
@@ -26,13 +32,13 @@ export const Hero = () => {
       </Badge>
       <List disablePadding>
         <ListSubheader sx={{ ...listItem, ...username }}>
-          Benjamin Lesné
+          {data.firstName + " " + data.lastName}
         </ListSubheader>
         <ListItem disablePadding>
-          <ListItemText primary="benjamin.lesne@outlook.fr" sx={listItem} />
+          <ListItemText primary={data.email} sx={listItem} />
         </ListItem>
         <ListItem disablePadding>
-          <ListItemText primary="0616285335" sx={listItem} />
+          <ListItemText primary={data.phoneNumber} sx={listItem} />
         </ListItem>
       </List>
     </Box>
