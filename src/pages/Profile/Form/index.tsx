@@ -10,10 +10,11 @@ import {
   ListItemIcon,
   ListItemText,
   MenuItem,
+  Slide,
   TextField,
   Typography,
 } from "@mui/material";
-import { form, buttons, cancel } from "./styles";
+import { form, buttons, cancel, mobileMenuStyle } from "./styles";
 import type { InputData } from "../../../utils/Types";
 
 import dayjs, { Dayjs } from "dayjs";
@@ -21,7 +22,15 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useState } from "react";
-import { Article, AddCircleOutline, MoreVert } from "@mui/icons-material";
+import {
+  Article,
+  AddCircleOutline,
+  MoreVert,
+  Visibility,
+  Delete,
+  Create,
+  FileDownload,
+} from "@mui/icons-material";
 
 interface Props {
   inputs: InputData[];
@@ -30,6 +39,14 @@ interface Props {
 export const Form = ({ inputs }: Props) => {
   const [birthday, setBirthday] = useState<Dayjs | null>(null);
   const [isDocuments, setIsDocuments] = useState<boolean>(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  const mobileMenu = [
+    { icon: <Visibility />, text: "Afficher" },
+    { icon: <FileDownload />, text: "Télécharger" },
+    { icon: <Create />, text: "Renommer" },
+    { icon: <Delete />, text: "Supprimer" },
+  ];
 
   function generateInputsComponents(inputsData: InputData[]) {
     console.log(inputsData);
@@ -60,35 +77,52 @@ export const Form = ({ inputs }: Props) => {
           if (isDocuments === false) setIsDocuments(true);
           return (
             <List key={crypto.randomUUID()}>
-              <ListItem sx={{ padding: "0px" }}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <Article />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary="CV.pdf"
-                  secondary="Ajouté le 28/12/2022"
-                />
-                <Typography
-                  component="span"
-                  sx={{
-                    padding: "5px 10px",
-                    backgroundColor: "green",
-                    color: "white",
-                    borderRadius: "4px",
-                  }}
-                >
-                  Public
-                </Typography>
-                <ListItemButton
-                  sx={{ justifyContent: "flex-end", paddingRight: "unset" }}
-                >
-                  <ListItemIcon sx={{ minWidth: "unset" }}>
-                    <MoreVert />
-                  </ListItemIcon>
-                </ListItemButton>
-              </ListItem>
+              {inputs.map((input) => {
+                const documentComponents = input.documents?.map((document) => {
+                  const documentDate = dayjs
+                    .unix(document.date)
+                    .format("DD/MM/YYYY");
+
+                  return (
+                    <ListItem sx={{ padding: "0px" }} key={crypto.randomUUID()}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <Article />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={document.name}
+                        secondary={"Ajouté le " + documentDate}
+                      />
+                      {document.visibility === "Public" && (
+                        <Typography
+                          component="span"
+                          sx={{
+                            padding: "5px 10px",
+                            backgroundColor: "green",
+                            color: "white",
+                            borderRadius: "4px",
+                          }}
+                        >
+                          Public
+                        </Typography>
+                      )}
+                      <ListItemButton
+                        sx={{
+                          justifyContent: "flex-end",
+                          paddingRight: "unset",
+                        }}
+                        onClick={() => setShowMobileMenu(!showMobileMenu)}
+                      >
+                        <ListItemIcon sx={{ minWidth: "unset" }}>
+                          <MoreVert />
+                        </ListItemIcon>
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                });
+                return documentComponents;
+              })}
             </List>
           );
         default:
@@ -116,15 +150,27 @@ export const Form = ({ inputs }: Props) => {
   return (
     <Container component={isDocuments ? "div" : "form"} sx={form}>
       {isDocuments && (
-        <Box sx={{ ...buttons, textAlign: "right", marginTop: "0" }}>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<AddCircleOutline />}
-          >
-            Nouveau
-          </Button>
-        </Box>
+        <>
+          <Box sx={{ ...buttons, textAlign: "right", marginTop: "0" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddCircleOutline />}
+            >
+              Nouveau
+            </Button>
+          </Box>
+          <Slide direction="up" in={showMobileMenu} mountOnEnter unmountOnExit>
+            <List sx={mobileMenuStyle}>
+              {mobileMenu.map((item) => (
+                <ListItem key={crypto.randomUUID()}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText>{item.text}</ListItemText>
+                </ListItem>
+              ))}
+            </List>
+          </Slide>
+        </>
       )}
       {generateInputsComponents(inputs)}
       {isDocuments === false && (
