@@ -7,7 +7,6 @@ export const data: { title: string; inputs: InputData[] }[] = [
       {
         id: "identifier",
         label: "Identifiant",
-        helperText: "reçu par mail lors de la création de votre compte",
         defaultValue: "",
       },
       {

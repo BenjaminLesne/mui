@@ -6,7 +6,6 @@ export const theme = createTheme({
       main: "#4B59C4",
     },
     secondary: {
-      // main: "#F3F8FF",
       main: "hsl(233, 51%, 80%)",
     },
     ternary: {

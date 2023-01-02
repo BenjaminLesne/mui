@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# Little Mui project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Here is my very first project with Materal UI. (pretty cool library by the way)
 
-## Available Scripts
+### Browser used/support: Firefox developer edition 109.0b7 (64-bit)
 
-In the project directory, you can run:
+Any other browser might not look like the desired design
+(In Chrome, only the Samsung Galaxy S8+ device from the inspector window seems to behave as expected)
 
-### `npm start`
+Designed by me (see two screenshots)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img src="lica-test-mobile.png" alt="mobile screenshot" width="375"/>
+<img src="lica-test-desktop.png" alt="desktop screenshot" />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Instructions
 
-### `npm test`
+- The project should be developed with React and we should use the components of [MUI](https://mui.com) that implement Material UI as much as possible.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Attached are the following screenshots:
 
-### `npm run build`
+1. [My profile screen 1](https://gitlab.com/LicaTech/test-dev/-/blob/main/Screen_Shot_2022-11-23_at_4.31.09_PM.png)
+1. [My profile screen 2](https://gitlab.com/LicaTech/test-dev/-/blob/main/Screen_Shot_2022-11-23_at_4.31.16_PM.png)
+1. [My documents section redirects to this view](https://gitlab.com/LicaTech/test-dev/-/blob/main/Screen_Shot_2022-11-23_at_4.39.30_PM.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This is a view of the profile information of a participant. The different information is organized in the following sections:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Image
+- Contact information
+- General information
+- Security
+- Address
+- My Documents (which redirects to another page)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**The mock-ups are given for information purposes and are NOT to be REPRODUCED.**
 
-### `npm run eject`
+We want to reorganize this information to make it more readable/user-friendly.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+GOAL: propose a new design and implement it using MUI components (custom components only if necessary).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- The UI should be compatible in mobile view following the mobile first principle.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- The colors/theme is free and use a Material palette of your choice, just make sure that it is pleasant to the eye ;).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- All the buttons("enregistrer" and "nouveau") of the screenshots should be present (NO action on click is required).
 
-## Learn More
+- To retrieve the data, use the file data.json. It should be loaded with a method [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- The choice of the front end architecture is free and should be explained during the interview :)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The code should be pushed on a branch named exercise-MyInitials-DateRendu, example exercise-FI-23112022
